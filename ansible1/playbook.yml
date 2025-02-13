@@ -1,108 +1,20 @@
 ---
-# Create 10 users
-- name: Ansible 1 tasks
+
+- name: Challenge 2
   hosts: server2
   become: true
+
   tasks:
-    - name: Create groups
-      ansible.builtin.group:
-        name: "{{ item }}"
-      loop:
-        - Sales
-        - Support
-        - Services
-        - IT
+    - name: get partition info
+      parted:
+        device: /dev/nvme1n1
+        number: 1
+        part_end: 1GiB
+        state: present
+        fs_type: xfs4
 
-    - name: Create users
-      ansible.builtin.user:
-        name: Annabelle
+    - name: mount the filesystem
+      ansible.posix.mount:
+        path: /extdrive
+        src: /dev/nvme1n1p1
         state: present
-        password: "@#FD12"
-        group: Sales
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Bob
-        state: present
-        password: "@#FD12"
-        group: IT
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Annabelle
-        state: present
-        password: "@#FD12"
-        group: Sales
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Carl
-        state: present
-        password: "@#FD12"
-        group: Support
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Dyson
-        state: present
-        password: "@#FD12"
-        group: Support
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Evert
-        state: present
-        password: "@#FD12"
-        group: IT
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Frank
-        state: present
-        password: "@#FD12"
-        group: Sales
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Gerry
-        state: present
-        password: "@#FD12"
-        group: Support
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Harold
-        state: present
-        password: "@#FD12"
-        group: IT
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Isabella
-        state: present
-        password: "@#FD12"
-        group: Services
-
-    - name: Create users
-      ansible.builtin.user:
-        name: Jameson
-        state: present
-        password: "@#FD12"
-        group: Services
-      
-    - name: Set authorized key taken from file
-      ansible.posix.authorized_key:
-        user: "{{ item  }}"
-        state: present
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFN90Xtfjxqs2ZpO0VqR1jr92mJiTx3IaEl/F+LiOZJK"
-      loop:
-        - Annabelle
-        - Bob
-        - Carl
-        - Dyson
-        - Evert
-        - Frank
-        - Gerry
-        - Harold
-        - Isabella
-        - Jameson
