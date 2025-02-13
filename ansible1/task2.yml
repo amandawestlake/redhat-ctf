@@ -1,0 +1,20 @@
+---
+
+- name: Challenge 2
+  hosts: server2
+  become: true
+
+  tasks:
+    - name: get partition info
+      parted:
+        device: /dev/nvme1n1
+        number: 1
+        part_end: 1GiB
+        state: present
+        fs_type: xfs4
+
+    - name: mount the filesystem
+      ansible.posix.mount:
+        path: /extdrive
+        src: /dev/nvme1n1p1
+        state: present
