@@ -1,0 +1,90 @@
+---
+# Create 10 users
+
+- name: Create groups
+  ansible.builtin.group:
+    name: {{ item }}
+  loop:
+    - Sales
+    - Support
+    - Services
+    - IT
+
+- name: Create users
+  ansible.builtin.user:
+    name: Annabelle
+    state: present
+    password: "@#FD12"
+    group: Sales
+
+- name: Create users
+  ansible.builtin.user:
+    name: Bob
+    state: present
+    password: "@#FD12"
+    group: IT
+
+- name: Create users
+  ansible.builtin.user:
+    name: Annabelle
+    state: present
+    password: "@#FD12"
+    group: Sales
+
+- name: Create users
+  ansible.builtin.user:
+    name: Carl
+    state: present
+    password: "@#FD12"
+    group: Support
+
+- name: Create users
+  ansible.builtin.user:
+    name: Dyson
+    state: present
+    password: "@#FD12"
+    group: Support
+
+- name: Create users
+  ansible.builtin.user:
+    name: Evert
+    state: present
+    password: "@#FD12"
+    group: IT
+
+- name: Create users
+  ansible.builtin.user:
+    name: Frank
+    state: present
+    password: "@#FD12"
+    group: Sales
+
+- name: Create users
+  ansible.builtin.user:
+    name: Gerry
+    state: present
+    password: "@#FD12"
+    group: Support
+
+- name: Create users
+  ansible.builtin.user:
+    name: Harold
+    state: present
+    password: "@#FD12"
+    group: IT
+
+- name: Create users
+  ansible.builtin.user:
+    name: Isabella
+    state: present
+    password: "@#FD12"
+    group: Services
+
+- name: Create users
+  ansible.builtin.user:
+    name: Jameson
+    state: present
+    password: "@#FD12"
+    group: Services
+
+  
