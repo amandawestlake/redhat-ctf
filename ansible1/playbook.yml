@@ -2,6 +2,7 @@
 # Create 10 users
 - name: Ansible 1 tasks
   hosts: server2
+  become: true
   tasks:
     - name: Create groups
       ansible.builtin.group:
