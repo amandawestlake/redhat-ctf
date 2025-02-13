@@ -1,7 +1,7 @@
 ---
 # Create 10 users
 - name: Ansible 1 tasks
-  hosts: server2.8kmvd.sandbox3781.opentlc.com
+  hosts: localhost
   tasks:
     - name: Create groups
       ansible.builtin.group:
